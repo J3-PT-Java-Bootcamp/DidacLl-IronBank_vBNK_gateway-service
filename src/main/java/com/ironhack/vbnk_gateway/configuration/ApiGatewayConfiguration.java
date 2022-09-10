@@ -11,11 +11,11 @@ public class ApiGatewayConfiguration {
     @Bean
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route(p -> p.path("/data/**")
+                .route(p -> p.path("/v1/data/**")
                         .uri("lb://VBNK-DATA-SERVICE"))
-                .route(p -> p.path("/transactions/**")
+                .route(p -> p.path("/v1/trans/**")
                         .uri("lb://VBNK-TRANSACTION-SERVICE"))
-                .route(p -> p.path("/anti-fraud/**")
+                .route(p -> p.path("/v1/anti-fraud/**")
                         .uri("lb://VBNK-ANTI-FRAUD-SERVICE"))
                 .build();
     }
