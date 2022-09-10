@@ -11,6 +11,9 @@ public class ApiGatewayConfiguration {
     @Bean
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
+                .route(p -> p.path("/v1/security/**")
+//                        .filters(f -> f.addRequestHeader())
+                        .uri("lb://VBNK-AUTHENTICATION-SERVICE"))
                 .route(p -> p.path("/v1/data/**")
                         .uri("lb://VBNK-DATA-SERVICE"))
                 .route(p -> p.path("/v1/trans/**")
