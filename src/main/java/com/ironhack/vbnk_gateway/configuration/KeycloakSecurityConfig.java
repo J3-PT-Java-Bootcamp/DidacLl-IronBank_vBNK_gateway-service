@@ -29,9 +29,11 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
                 .authorizeRequests()
                 .antMatchers("/v1/security/public/token").permitAll()
                 .antMatchers(HttpMethod.POST, "/v1/security/auth/create").hasRole("admin")
+                .antMatchers("/v1/**/public").permitAll()
+                .antMatchers("/v1/**/client").permitAll()
                 .antMatchers("/v1/**/auth").hasAnyRole("admin", "client")
                 .antMatchers("/v1/**/main").hasAnyRole("admin", "customer")
-                .antMatchers("/v1/**/client").hasRole("client")
+//                .antMatchers("/v1/**/client").hasRole("client")
                 .antMatchers("/v1").hasRole("developer")
                 .anyRequest()
                 .authenticated()
@@ -42,6 +44,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.eraseCredentials(false);
         KeycloakAuthenticationProvider keycloakAuthenticationProvider = keycloakAuthenticationProvider();
         keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(new SimpleAuthorityMapper());
         auth.authenticationProvider(keycloakAuthenticationProvider);
