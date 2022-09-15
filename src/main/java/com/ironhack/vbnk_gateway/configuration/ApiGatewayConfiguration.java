@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Configuration;
 public class ApiGatewayConfiguration {
 
     @Bean
-    public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
+    public RouteLocator gatewayRouter(RouteLocatorBuilder builder){
         return builder.routes()
+                .route(p -> p.path("/v1/security/**")
+                        .uri("lb://VBNK-AUTHENTICATION-SERVICE"))
                 .route(p -> p.path("/v1/data/**")
                         .uri("lb://VBNK-DATA-SERVICE"))
-                .route(p -> p.path("/v1/trans/**")
+                .route(p -> p.path("/v1/transactions/**")
                         .uri("lb://VBNK-TRANSACTION-SERVICE"))
                 .route(p -> p.path("/v1/anti-fraud/**")
                         .uri("lb://VBNK-ANTI-FRAUD-SERVICE"))
