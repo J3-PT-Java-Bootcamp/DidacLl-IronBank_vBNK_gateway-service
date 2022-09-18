@@ -17,7 +17,7 @@ public class ApiGatewayConfiguration {
                         .uri("lb://VBNK-DATA-SERVICE"))
                 .route(p -> p.path("/v1/transactions/**")
                         .uri("lb://VBNK-TRANSACTION-SERVICE"))
-                .route(p -> p.path("/v1/anti-fraud/**")
+                .route(p -> p.path("/v1/af/**")
                         .uri("lb://VBNK-ANTI-FRAUD-SERVICE"))
                 .build();
     }

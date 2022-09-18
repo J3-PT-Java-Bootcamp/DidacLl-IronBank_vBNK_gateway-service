@@ -5,12 +5,10 @@ import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurer
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
@@ -27,20 +25,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/v1").permitAll()
-//                .antMatchers(HttpMethod.POST, "/v1/security/auth/create").permitAll()
-//                .antMatchers(HttpMethod.POST, "/v1/security/auth/create").hasRole("admin")
-//                .antMatchers("/v1/**/public").permitAll()
-//                .antMatchers("/v1/**/client").hasRole("developer")
-//                .antMatchers("/v1/**/auth").hasAnyRole("admin", "client")
-//                .antMatchers("/v1/**/main").hasAnyRole("admin", "customer")
-////                .antMatchers("/v1/**/client").hasRole("client")
-//                .antMatchers("/v1").hasRole("developer")
-                /*.anyRequest()
-                .authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)*/;
+                .antMatchers("/v1/**").permitAll();
     }
 
     @Autowired
